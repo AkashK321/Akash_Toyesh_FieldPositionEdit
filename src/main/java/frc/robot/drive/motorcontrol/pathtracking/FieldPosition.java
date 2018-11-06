@@ -79,6 +79,10 @@ public class FieldPosition {
         double leftSensorReading, 
         double rightSensorReading) {
         heading = Math.toRadians(initialHeading);
+        double XRposition = RADIUS;
+        double XLposition = 0 - RADIUS;
+        double YRposition = 0;
+        double YLposition = 0;
         x = initialXPosition;
         y = initialYPosition;
         leftX = x + RADIUS * Math.cos(heading + leftWheelPosition);
@@ -98,6 +102,9 @@ public class FieldPosition {
     }
 
     public void update(double leftSensorReading, double rightSensorReading) {
+
+        //To do: initialize the sin and cos headings
+
         long currentTime = System.currentTimeMillis();
         double period = (currentTime - timestamp);
 
