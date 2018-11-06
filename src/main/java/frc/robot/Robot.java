@@ -73,7 +73,6 @@ public class Robot extends TimedRobot {
 		grabber = Grabber.getInstance();
 		matchConfig = MatchConfiguration.getInstance();
 		climber = Climber.getInstance();
-		
 		drive = Drive.getInstance();
 		drive.configPeakOutput(1.0);
 
