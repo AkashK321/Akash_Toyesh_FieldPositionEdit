@@ -107,8 +107,8 @@ public class FieldPosition {
         // System.out.println("Change in Heading: " + df.format(Math.toDegrees(changeInHeading)));
         // System.out.println("Original Position: (" + df.format(leftX) + ", " + df.format(leftY) + "), (" + df.format(rightX) + ", " + df.format(rightY) + ")" );
 
-        double currentVelocity = (leftMove + rightMove) / (2*period); // inches per ms
-        accelleration = (currentVelocity - velocity) / period;
+        //double currentVelocity = (leftMove + rightMove) / (2*period); // inches per ms
+        //accelleration = (currentVelocity - velocity) / period;
         // System.out.println("Previous Velocity: " + df.format(1000/12*velocity) + " Velocity: " + df.format(1000/12*currentVelocity) + " Accelleration: " + df.format(1000/12*accelleration) + " period " + period);
 
         if (changeInHeading == 0) {
