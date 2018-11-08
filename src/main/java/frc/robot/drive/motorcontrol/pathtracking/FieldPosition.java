@@ -130,7 +130,7 @@ public class FieldPosition {
         }
 
         double l = 0.0;
-        //Distance from the axis of rotation to center of robot
+        //Distance from the center of rotation to center of robot
         l = (DeltaR + DeltaL)/theta;
 
         double delta_XL_Position = (l-RADIUS)(Math.cos(theta)-1);
