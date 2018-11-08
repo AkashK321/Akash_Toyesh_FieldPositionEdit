@@ -80,7 +80,7 @@ public class FieldPosition {
         double rightSensorReading) {
         heading = Math.toRadians(initialHeading);
         double XRposition = RADIUS;
-        double XLposition = 0 - RADIUS;
+        double XLposition = RADIUS * (-1);
         double YRposition = 0;
         double YLposition = 0;
         x = initialXPosition;
@@ -105,11 +105,41 @@ public class FieldPosition {
 
         //To do: initialize the sin and cos headings
 
+        double cosHeading = (XRposition - XLposition)/(2 * RADIUS);
+        double sinHeading = (YRposition - YLposition)/(2 * RADIUS);
+
+        double theta = 0.0;
+        double DeltaR = rightSensorReading - lastRightSensorReading;
+        double DeltaL = leftSensorReading - lastLeftSensorReading;
+        
+        if(DeltaR > DeltaL)
+        {
+            theta = (DeltaR - DeltaL)/2*RADIUS;
+            // Drove left
+        } else if(DeltaL > DeltaR)
+        {
+            theta = (DeltaL - DeltaR)/2*RADIUS;
+            //Drove right
+        } else {
+            //Drove straight
+        }
+
+        double l = 0.0;
+        //Distance from the axis of rotation to center of robot
+        l = (DeltaR + DeltaL)/theta;
+
+        double delta_XL_Position = (l-RADIUS)(Math.cos(theta)-1);
+        double delta_XR_Position = (l+RADIUS)(Math.cos(theta)-1);
+
+        double delta_YL_Position = (l-RADIUS)(Math.sin(theta));
+        double delta_YR_Position = (l+RADIUS)(Math.sin(theta));
+
         long currentTime = System.currentTimeMillis();
         double period = (currentTime - timestamp);
 
         double leftMove = (leftSensorReading - lastLeftSensorReading);
         double rightMove = (rightSensorReading - lastRightSensorReading);
+
         changeInHeading = Utils.normalizeAngle((rightMove - leftMove) / (2 * RADIUS));
         // System.out.println("Change in Heading: " + df.format(Math.toDegrees(changeInHeading)));
         // System.out.println("Original Position: (" + df.format(leftX) + ", " + df.format(leftY) + "), (" + df.format(rightX) + ", " + df.format(rightY) + ")" );
@@ -118,6 +148,7 @@ public class FieldPosition {
         //accelleration = (currentVelocity - velocity) / period;
         // System.out.println("Previous Velocity: " + df.format(1000/12*velocity) + " Velocity: " + df.format(1000/12*currentVelocity) + " Accelleration: " + df.format(1000/12*accelleration) + " period " + period);
 
+        /*
         if (changeInHeading == 0) {
             leftX = leftX - leftMove * Math.cos(heading + leftWheelPosition);
             leftY = leftY - leftMove * Math.sin(heading + leftWheelPosition);
@@ -152,6 +183,7 @@ public class FieldPosition {
         timestamp = currentTime;
         x = (leftX + rightX) / 2;
         y = (leftY + rightY) / 2;
+        */
     }
 
     public String toString() {
