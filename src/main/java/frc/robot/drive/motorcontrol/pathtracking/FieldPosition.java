@@ -35,6 +35,11 @@ public class FieldPosition {
     public double accelleration() { return accelleration; }
     private long timestamp;
     public double timestamp() { return (timestamp - baseTime) / 1000; }
+	
+    double XRposition = RADIUS;
+    double XLposition = RADIUS * (-1);
+    double YRposition = 0;
+    double YLposition = 0;
 
     private long baseTime;
     private double leftX = 0.0;
@@ -79,10 +84,10 @@ public class FieldPosition {
         double leftSensorReading, 
         double rightSensorReading) {
         heading = Math.toRadians(initialHeading);
-        double XRposition = RADIUS;
+        /*double XRposition = RADIUS;
         double XLposition = RADIUS * (-1);
         double YRposition = 0;
-        double YLposition = 0;
+        double YLposition = 0;*/
         x = initialXPosition;
         y = initialYPosition;
         leftX = x + RADIUS * Math.cos(heading + leftWheelPosition);
